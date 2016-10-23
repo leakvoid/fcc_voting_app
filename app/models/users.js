@@ -12,7 +12,7 @@ var choiceSchema = new Schema({
     votes: [voteSchema]
 });
 
-var poolSchema = new Schema({
+var pollSchema = new Schema({
     name: String,
     choices: [choiceSchema]
 });
@@ -24,10 +24,10 @@ var userSchema = new Schema({
 	username: String,
         publicRepos: Number
     },
-    pools: [poolSchema]
+    polls: [pollSchema]
 });
 
 //module.exports = mongoose.model('Vote', voteSchema);
 //module.exports = mongoose.model('Choice' choiceSchema);
-//module.exports = mongoose.model('Pool', poolSchema);
+//module.exports = mongoose.model('Poll', poolSchema);
 module.exports = mongoose.model('User', userSchema);
