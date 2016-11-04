@@ -2,9 +2,11 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var ObjectId = Schema.Types.ObjectId;
 
 var voteSchema = new Schema({
-    ip_address: String
+    ip_address: String,
+    user_id: ObjectId
 });
 
 var choiceSchema = new Schema({

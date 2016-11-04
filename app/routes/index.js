@@ -5,13 +5,15 @@ var PollController = require(path + '/app/controllers/poll_controller.js');
 
 module.exports = function (app, passport) {
 
+    var poll_controller = new PollController();
+
     // GET show all polls for user
     app.route('/users/:user_id/polls')
         .get(poll_controller.index_for_user);
 
     // GET show all polls
     app.route('/polls')
-        .get(poll_contorller.index);
+        .get(poll_controller.index);
 
     // GET new poll form
     app.route('/polls/new')
@@ -43,13 +45,7 @@ module.exports = function (app, passport) {
 
 
 
-
-
-
-
-
-	var clickHandler = new ClickHandler();
-
+    /*
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
 			res.sendFile(path + '/public/index.html');
@@ -89,4 +85,5 @@ module.exports = function (app, passport) {
 		.get(isLoggedIn, clickHandler.getClicks)
 		.post(isLoggedIn, clickHandler.addClick)
 		.delete(isLoggedIn, clickHandler.resetClicks);
+    */
 };
