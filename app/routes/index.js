@@ -27,10 +27,6 @@ module.exports = function (app, passport) {
     app.route('/polls/:poll_id')
         .get(poll_controller.show);
 
-    // POST vote for item
-    app.route('/polls/:poll_id/vote')
-        .post(poll_controller.register_vote);
-
     // GET show graph for poll
     app.route('/polls/:poll_id/chart')
         .get(poll_controller.show_chart);
@@ -42,6 +38,25 @@ module.exports = function (app, passport) {
     // DELETE poll
     app.route('polls/:poll_id')
         .delete(poll_controller.destroy);
+
+    // POST add new vote
+    app.route('/votes')
+        .post(poll_controller.register_vote);
+
+    app.route('/logout')
+	.get(function (req, res) {
+	    req.logout();
+	    res.redirect('/polls');
+	});
+
+    app.route('/auth/github')
+	.get(passport.authenticate('github'));
+
+    app.route('/auth/github/callback')
+	.get(passport.authenticate('github', {
+	    successRedirect: '/polls',
+	    failureRedirect: '/polls'
+	}));
 
 
 
@@ -56,11 +71,6 @@ module.exports = function (app, passport) {
 			res.sendFile(path + '/public/login.html');
 		});
 
-	app.route('/logout')
-		.get(function (req, res) {
-			req.logout();
-			res.redirect('/login');
-		});
 
 	app.route('/profile')
 		.get(isLoggedIn, function (req, res) {
@@ -72,14 +82,6 @@ module.exports = function (app, passport) {
 			res.json(req.user.github);
 		});
 
-	app.route('/auth/github')
-		.get(passport.authenticate('github'));
-
-	app.route('/auth/github/callback')
-		.get(passport.authenticate('github', {
-			successRedirect: '/',
-			failureRedirect: '/login'
-		}));
 
 	app.route('/api/:id/clicks')
 		.get(isLoggedIn, clickHandler.getClicks)

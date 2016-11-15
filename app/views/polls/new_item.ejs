@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Create Poll</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
+  <body>
+
+    <% include ../partials/header %>
+
+    <h1>Create New Poll</h1>
+
+    <form action="/polls" accept-charset="UTF-8" method="post">
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Question</th>
+            <td><input type="text" placeholder="Enter question for the poll" name="poll[name]"></td>
+          </tr>
+        </thead>
+        <tbody id="option-input-container">
+          <tr>
+            <th>1.</th>
+            <td><input type="text" placeholder="Enter poll option" name="poll[choice-0]" id="option-input-box-0"></td>
+          </tr>
+          <tr>
+            <th>2.</th>
+            <td><input type="text" placeholder="Enter poll option" name="poll[choice-1]" id="option-input-box-1"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="btn">
+        <input type="submit" value="Create Poll" name="commit">
+      </div>
+
+    </form>
+
+    <script type="text/javascript" src="client_js/new_item.js"></script>
+
+  </body>
+</html>

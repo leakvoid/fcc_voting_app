@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>Polls List</title>
+  </head>
+  <body>
+
+    <% include ../partials/header %>
+
+    <h1>List of all Polls</h1>
+    <% for( var i = 0; i < polls.length; i++ ) { %>
+      <a href="/polls/<%= polls[i]._id; %>"><%= polls[i].name; %></a><br>
+    <% } %>
+
+  </body>
+</html>

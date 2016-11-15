@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Vote for Poll</title>
+  </head>
+  <body>
+
+    <% include ../partials/header %>
+
+    <h1><%= poll.name %></h1>
+
+    <form action="/votes" accept-charset="UTF-8" method="post">
+      <% for( var i = 0; i < poll.choices.length; i++ ) { %>
+         <input type="radio" name="vote[choice_id]" value="<%= poll.choices[i]._id %>" <%= (i === 0 ? "checked" : "") %> >
+         <label><%= poll.choices[i].name %></label><br>
+      <% } %>
+      <input type="submit" value="Vote" name="commit">
+    </form>
+
+  </body>
+</html>

@@ -6,7 +6,7 @@ var ObjectId = Schema.Types.ObjectId;
 
 var voteSchema = new Schema({
     ip_address: String,
-    user_id: ObjectId
+    vote_owner: [{ type: ObjectId, ref: 'User'}]
 });
 
 var choiceSchema = new Schema({
@@ -29,7 +29,4 @@ var userSchema = new Schema({
     polls: [pollSchema]
 });
 
-//module.exports = mongoose.model('Vote', voteSchema);
-//module.exports = mongoose.model('Choice' choiceSchema);
-//module.exports = mongoose.model('Poll', poolSchema);
 module.exports = mongoose.model('User', userSchema);
