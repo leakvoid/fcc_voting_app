@@ -32,12 +32,12 @@ module.exports = function (app, passport) {
         .get(poll_controller.show_chart);
 
     // PATCH update poll by adding new option
-    app.route('/polls/:poll_id')
-        .patch(poll_controller.update);
+    app.route('/polls/:poll_id/patch')
+        .post(poll_controller.update);
 
     // DELETE poll
-    app.route('polls/:poll_id')
-        .delete(poll_controller.destroy);
+    app.route('/polls/:poll_id/delete')
+        .post(poll_controller.destroy);
 
     // POST add new vote
     app.route('/votes')

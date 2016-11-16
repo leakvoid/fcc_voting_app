@@ -16,5 +16,18 @@
       <input type="submit" value="Vote" name="commit">
     </form>
 
+    <% if(auth_status) { %>
+      <form action="/polls/<%= poll._id %>/patch" accept-charset="UTF-8" method="post">
+        <input type="text" placeholder="Enter custom option" name="choice[name]">
+        <input type="submit" value="Custom Vote" name="update">
+      </form>
+    <% } %>
+
+    <% if(owner_status) { %>
+      <form action="/polls/<%= poll._id %>/delete" accept-charset="UTF-8" method="post">
+        <input type="submit" value="Delete Poll" name="delete">
+      </form>
+    <% } %>
+
   </body>
 </html>

@@ -1,1 +1,19 @@
-<% include auth %>
+
+<table>
+  <tr>
+    <td>
+      <a href="/polls">ALL POLLS</a>
+    </td>
+    <% if(auth_status) { %>
+      <td>
+        <a href="/users/<%= user._id %>/polls">MY POLLS</a>
+      </td>
+      <td>
+        <a href="/polls/new">NEW POLL</a>
+      </td>
+    <% } %>
+    <td>
+      <% include auth %>
+    </td>
+  </tr>
+</table>

@@ -9,7 +9,7 @@ function PollController() {
 
     function is_owner(req, owner_id) {
         if(req.user)
-            return (req.user._id == owner_id);
+            return (req.user._id.toString() == owner_id.toString());
         else
             return false;
     }
@@ -233,6 +233,7 @@ function PollController() {
 
                 res.render('polls/index',
                            { 'auth_status': req.isAuthenticated(),
+                             'user': fu_res.user,
                              'polls': fu_res.user.polls });
             });
         }
@@ -244,6 +245,7 @@ function PollController() {
 
             res.render('polls/index',
                        { 'auth_status': req.isAuthenticated(),
+                         'user': req.user,//CHECK 
                          'polls': fap_res.polls });
         });
     };
@@ -251,7 +253,9 @@ function PollController() {
     this.new_item = [
         check_authentication,
         function(req, res) {
-            res.render('polls/new_item', { 'auth_status': req.isAuthenticated() });
+            res.render('polls/new_item',
+                       { 'auth_status': req.isAuthenticated(),
+                         'user': req.user });//CHECK
         }
     ];
 
@@ -284,6 +288,7 @@ function PollController() {
 
                 res.render('polls/show', 
                            { 'auth_status': req.isAuthenticated(),
+                             'user': fp_res.user,
                              'owner_status': is_owner(req, fp_res.user._id),
                              'poll': fp_res.poll });
             });
@@ -293,7 +298,7 @@ function PollController() {
         }
     ];
 
-    function is_already_voted(poll, user_id, ip_address) {
+    function is_already_voted(poll, user_id, ip_address) {//CHECK fix
         poll.choices.forEach( function(choice) {
             choice.votes.forEach( function(vote) {
                 if( vote.vote_owner === user_id || vote.ip_address === ip_address )
@@ -342,6 +347,7 @@ function PollController() {
 
                 res.render('polls/show_chart',
                            { 'auth_status': req.isAuthenticated(),
+                             'user': fp_res.user,
                              'poll': fp_res.poll });
             });
         }
@@ -363,11 +369,11 @@ function PollController() {
                     console.log('Added new Choice <' + JSON.stringify(sch_res.choice) +
                                 '> to the Poll <' + JSON.stringify(sch_res.poll) + '>');
 
-                    req.body.vote.choice_id = sch_res.choice._id;
-                    this.register_vote(req, res);
-                });
-            });
-        }
+                    req.body.vote = { choice_id: sch_res.choice._id.toString() };
+                    this.register_vote[1](req, res);//CHECK
+                }.bind(this));
+            }.bind(this));
+        }.bind(this)
     ];
 
     this.destroy = [

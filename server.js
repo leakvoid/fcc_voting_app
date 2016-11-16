@@ -21,6 +21,7 @@ app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/public', express.static(process.cwd() + '/public'));
 app.use('/common', express.static(process.cwd() + '/app/common'));
 app.use('/polls/client_js', express.static(process.cwd() + '/app/views/polls'));//CHECK
+app.use('/polls/:poll_id/client_js', express.static(process.cwd() + '/app/views/polls'));//CHECK
 
 app.use(bodyParser.urlencoded({
     extended: true
