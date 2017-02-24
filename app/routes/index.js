@@ -7,6 +7,11 @@ module.exports = function (app, passport) {
 
     var poll_controller = new PollController();
 
+    app.route('/')
+        .get(function(req, res) {
+            res.redirect('/polls');
+        });
+
     // GET show all polls for user
     app.route('/users/:user_id/polls')
         .get(poll_controller.index_for_user);
